@@ -8,19 +8,19 @@ This is the code repository for my bachelor project.
 ## Notebooks
 - folderscripts: creates the txt files with folder and file names needed to load the data
 
-- data_dict_build:  builds the data dictionary from the datafolders and gets the names of lakes from the csv
-- data_exploration:  plots and computaitons for data section
-- data_vis_wlts: plots and computations for water level time series. individual lakes, boxplot and heatmap
-- data_prep_steps: steps for running the data_prep and interpolation
-- data_lake_plots: plots of all time series subject to various criteria and interpolation
+- `data_dict_build`:  builds the data dictionary from the datafolders and gets the names of lakes from the csv
+- `data_exploration`:  plots and computaitons for data section
+- `data_vis_wlts`: plots and computations for water level time series. individual lakes, boxplot and heatmap
+- `data_prep_steps`: steps for running the data_prep and interpolation
+- `data_lake_plots`: plots of all time series subject to various criteria and interpolation
 
-- dirichlet synthetic torch: plots of dirichlet samples in 2D and 3D
-- plot_datasamples: plot the spheres with only the samples
+- `dirichlet synthetic torch`: plots of dirichlet samples in 2D and 3D
+- `plot_datasamples`: plot the spheres with only the samples
 
-- evaluate: run model evaluation on a single data set
-- evaluate loop: run model evaluation on several data set and several models 
-- evaluate_combine_dicts: combine evaluation results (when you have only had to re-run a single model)
-- evaluate_vis: visualise evaluation results
+- `evaluate`: run model evaluation on a single data set
+- `evaluate loop`: run model evaluation on several data set and several models 
+- `evaluate_combine_dicts`: combine evaluation results (when you have only had to re-run a single model)
+- `evaluate_vis`: visualise evaluation results
 
 
 ## Python scripts
