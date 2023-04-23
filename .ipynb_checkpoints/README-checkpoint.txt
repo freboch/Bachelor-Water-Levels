@@ -1,4 +1,11 @@
-#Notebooks
+# Bachelor project: 
+## Characterizing Lake Water Levels using Clustering and Archetypal Analysis Approaches
+
+This is the code repository for my bachelor project. 
+
+# Contents
+
+## Notebooks
 folderscripts: creates the txt files with folder and file names needed to load the data
 
 data_dict_build:  builds the data dictionary from the datafolders and gets the names of lakes from the csv
@@ -16,7 +23,7 @@ evaluate_combine_dicts: combine evaluation results (when you have only had to re
 evaluate_vis: visualise evaluation results
 
 
-#Python scripts
+## Python scripts
 
 dirichlet_func:  function to pull samples from the dirichlet distribution
 project_func:  function to project datapoint(s) to unit hypersphere
@@ -34,7 +41,7 @@ eval_model_plots: functions to plot model evaluation and save archetypes for GIS
 plot_sphere_func:  functions to plot sphere as well as samples and archetypes on sphere
 
 
-#Folders
+## Folders
 saves: has the data dictionary and results from model evaluations
 plots: has all plots
 
