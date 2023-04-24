@@ -117,10 +117,8 @@ def plot_loss(res, synth=True):
         ax.set_ylim(-0.0025,0.025)
         ax1.set_ylim(-5,50)
     else:
-        ax.set_ylim(-0.0025,0.025)
-        ax1.set_ylim(-5,50)
-        #ax.set_ylim(top=ymax+0.05*ymax)
-        #ax1.set_ylim(top=ymax1+0.05*ymax1)
+        ax.set_ylim(- 0.01, ymax+0.05*ymax)
+        ax1.set_ylim(- 2500, ymax1+0.05*ymax1)
     fig.legend()
     #ax.set_xticks(np.arange(9),labels=K)
     folder = f"plots/{data}_epochs{n_epoch}_sets{J}_iter{L}"
@@ -161,9 +159,8 @@ def plot_loss_gmm(res, synth=True):
     ax.set_xlabel('Number of components K')
     ax.grid(True)
     ax.set_ylim([-70,270])
-    #if synth:
-    #    ax.set_ylim(-0.005,0.1)
-    #    ax1.set_ylim(-8.5,165)
+    if 'lakes' == data:
+        ax.set_ylim([-35,-10])
     fig.legend()
     #ax.set_xticks(np.arange(9),labels=K)
     folder = f"plots/{data}_epochs{n_epoch}_sets{J}_iter{L}"
@@ -213,16 +210,16 @@ def plot_loss_v_epoch(res, synth=True):
             if model == 'DAA':
                 ax.set_ylim([-0.001,0.0240])
             if model == 'AA':
-                ax.set_ylim([-0.2,48])
-        else: 
-            if model == 'DAA':
-                ax.set_ylim([-0.001,0.0240])
-            if model == 'AA':
-                ax.set_ylim([-0.2,48])
-        #else:
-            #ax.set_ylim(bottom=0)
-        if model == 'NMF':
-            ax.set_ylim([-0.02,1000])
+                ax.set_ylim([-2,50])
+            if model == 'NMF':
+                ax.set_ylim([-20,1000])
+        #else: 
+            #if model == 'DAA':
+                #ax.set_ylim([-0.001,0.0240])
+            #if model == 'AA':
+                #ax.set_ylim([-0.2,48])
+            #if model == 'NMF':
+                #ax.set_ylim([-20,1000])
         ax.grid(True)
         fig.legend(loc='center right')
         fig.tight_layout(pad=1.0)
@@ -272,7 +269,7 @@ from NMI_func import *
 
 def plot_NMI_truth(res):
     
-    models = ['DAA', 'AA']
+    models = ['DAA', 'AA', 'GMM']
     models = [model for model in models if model in list(res.keys())]
     #colors = ['red','blue', 'green']
     if models == []:
@@ -295,8 +292,11 @@ def plot_NMI_truth(res):
     for m,model in enumerate(models):
         NMI_list = torch.zeros(len(K),J)
         for i,k in enumerate(K): # for each number of archetypes
-            for j in range(J):
-                S = res[model]['set_S'][i][j]
+            for j in range(J): # for each set
+                if model == 'DAA' or model == 'AA':
+                    S = res[model]['set_S'][i][j]
+                elif model == 'GMM':
+                    S = res[model]['set_resp'][i][j]
                 NMI_list[i,j] = NMI(Strue, S)
         NMI_k = torch.mean(NMI_list,dim=1).detach()
         NMI_error = torch.std(NMI_list,dim=1).detach()
@@ -345,9 +345,6 @@ def plot_NMI_sets(res, synth=True):
                 if model == 'DAA' or model == 'AA':
                     Sr = res[model]['set_S'][i][r]
                     Srm = res[model]['set_S'][i][rm]
-                elif model == 'NMF':
-                    Sr = res[model]['set_W'][i][r]
-                    Srm = res[model]['set_W'][i][rm]
                 elif model == 'GMM':
                     Sr = res[model]['set_resp'][i][r]
                     Srm = res[model]['set_resp'][i][rm]
