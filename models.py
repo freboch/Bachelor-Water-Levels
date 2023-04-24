@@ -73,8 +73,8 @@ class NMF(nn.Module):
         self.softplus = nn.Softplus()
         
     def forward(self):
-        w1 = self.softplus(self.W) # non-negative and rows sum to 1
-        h1 = self.softplus(self.H) # non-negative and rows sum to 1
+        w1 = self.softplus(self.W) # non-negative 
+        h1 = self.softplus(self.H) # non-negative
         
         # reconstructed data matrix
         X_hat = torch.matmul(w1,h1)

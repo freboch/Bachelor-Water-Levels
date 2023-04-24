@@ -110,11 +110,17 @@ def plot_loss(res, synth=True):
     align_yaxis(ax, ax1)
     ax.set_xlabel('Number of archetypes K')
     ax.grid(True)
-    #if synth:
-    #    ax.set_ylim(-0.005,0.1)
-    #    ax1.set_ylim(-8.5,165)
-    ax.set_ylim(top=ymax+0.05*ymax)
-    ax1.set_ylim(top=ymax1+0.05*ymax1)
+    if isinstance(data, int):
+        ax.set_ylim(-0.0025,0.085)
+        ax1.set_ylim(-0.005,0.16)
+    elif 'random' == data or 'synth lakes' == data:
+        ax.set_ylim(-0.0025,0.025)
+        ax1.set_ylim(-5,50)
+    else:
+        ax.set_ylim(-0.0025,0.025)
+        ax1.set_ylim(-5,50)
+        #ax.set_ylim(top=ymax+0.05*ymax)
+        #ax1.set_ylim(top=ymax1+0.05*ymax1)
     fig.legend()
     #ax.set_xticks(np.arange(9),labels=K)
     folder = f"plots/{data}_epochs{n_epoch}_sets{J}_iter{L}"
@@ -154,6 +160,7 @@ def plot_loss_gmm(res, synth=True):
     #align_yaxis(ax, ax1)
     ax.set_xlabel('Number of components K')
     ax.grid(True)
+    ax.set_ylim([-70,270])
     #if synth:
     #    ax.set_ylim(-0.005,0.1)
     #    ax1.set_ylim(-8.5,165)
@@ -197,13 +204,25 @@ def plot_loss_v_epoch(res, synth=True):
         ax.set_title(f'Data set: {test} {data}, epochs: {n_epoch}, sets: {J}, init: {L}, n: {size}')    
         ax.set_ylabel('Loss')
         ax.set_xlabel('Epochs')
-        #if synth:
-        #    if model == 'DAA':
-        #        ax.set_ylim([0,0.18])
-        #    if model == 'AA':
-        #        ax.set_ylim([0,330])
+        if isinstance(data, int):
+            if model == 'DAA':
+                ax.set_ylim([-0.01,0.18])
+            if model == 'AA':
+                ax.set_ylim([-0.02,0.330])
+        elif 'random' == data or 'synth lakes' == data:
+            if model == 'DAA':
+                ax.set_ylim([-0.001,0.0240])
+            if model == 'AA':
+                ax.set_ylim([-0.2,48])
+        else: 
+            if model == 'DAA':
+                ax.set_ylim([-0.001,0.0240])
+            if model == 'AA':
+                ax.set_ylim([-0.2,48])
         #else:
             #ax.set_ylim(bottom=0)
+        if model == 'NMF':
+            ax.set_ylim([-0.02,1000])
         ax.grid(True)
         fig.legend(loc='center right')
         fig.tight_layout(pad=1.0)
@@ -241,6 +260,7 @@ def plot_GMM_converge(res):
     ax.set_xlabel("Features")
     ax.set_ylabel("Converged models")
     ax.set_xticks(res['data']['K'])
+    ax.set_ylim([0,260])
 
     folder = f"plots/{data}_epochs{n_epoch}_sets{J}_iter{L}"
     makefolder(folder)
@@ -286,7 +306,9 @@ def plot_NMI_truth(res):
     ax.set_ylabel('Normalised Mutual Information')
     ax.set_xlabel('Number of components K')
     ax.grid(True)
-    #ax.set_ylim(0.4,1.02)
+    #if isinstance(data, int):
+    ax.set_ylim(-0.02,1.02)
+        
     #ax.set_ylim(0,1.02)
     fig.legend()
     #ax.set_xticks(np.arange(9),labels=K)
@@ -338,8 +360,8 @@ def plot_NMI_sets(res, synth=True):
     ax.set_ylabel('Normalised Mutual Information')
     ax.set_xlabel('Number of components K')
     ax.grid(True)
-    #if synth:
-        #ax.set_ylim(0.7,1.02)
+    #if isinstance(data, int):
+    ax.set_ylim(-0.02,1.1)
     fig.legend()
     #ax.set_xticks(np.arange(9),labels=K)
     folder = f"plots/{data}_epochs{n_epoch}_sets{J}_iter{L}"

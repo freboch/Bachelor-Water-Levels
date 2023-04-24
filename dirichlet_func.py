@@ -4,7 +4,7 @@ import numpy as np
 def my_dirichlet_torch(alpha, size, corners, return_S=False):
     """
     input:
-    alpha: concentration parameters alpha_i > 0. Tuble with as many elements as there are corners in the convex hull
+    alpha: concentration parameters alpha_i > 0. Tuple with as many elements as there are corners in the convex hull
     size: skalar number of samples to draw - will be the number of points in the sample
     corners: tensor matrix of coordinates for the convex hull, shape: (number of corners, dimension)
     output:
